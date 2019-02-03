@@ -50,7 +50,18 @@ $tasks_array = [
     ]
 ];
 
+//функция подсчета задач
+function count_item ($task_list, $project) {
+  $i = 0;
+  foreach ($task_list as $key => $category) {
+    if ($category['category_task'] == $project && !$category['complete_task']) {
+      $i++;
+    }
+  }
+  return $i;
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="ru">
   <head>
@@ -89,7 +100,7 @@ $tasks_array = [
               <ul class="main-navigation__list">
                 <li class="main-navigation__list-item">
                   <a class="main-navigation__list-item-link" href="#"><?=$value; ?> </a>
-                  <span class="main-navigation__list-item-count">0</span>
+                  <span class="main-navigation__list-item-count"><?=count_item($tasks_array, $value) ; ?></span>
                 </li>
               </ul>
             <?php endforeach; ?>
