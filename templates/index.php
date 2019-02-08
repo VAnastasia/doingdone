@@ -19,7 +19,7 @@
 <table class="tasks">
     <?php foreach ($tasks as $key => $item): ?>
         <?php if (!$item['complete_task']): ?>
-            <tr class="tasks__item task">
+            <tr class="tasks__item task <?=($item['date_task'] && (strtotime("+24 hours now") > strtotime($item['date_task'])) ? "task--important" : ""); ?>">
                 <td class="task__select">
                     <label class="checkbox task__checkbox">
                         <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
