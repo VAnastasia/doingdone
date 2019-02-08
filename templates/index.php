@@ -23,7 +23,7 @@
                 <td class="task__select">
                     <label class="checkbox task__checkbox">
                         <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                        <span class="checkbox_g_text"><?=esc($item['title_task']) ; ?></span>
+                        <span class="checkbox__text"><?=esc($item['title_task']) ; ?></span>
                     </label>
                 </td>
                 <td class="task__file">
