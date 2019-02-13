@@ -24,8 +24,8 @@ $show_complete_tasks = rand(0, 1);
 //функция подсчета задач
 function count_item($task_list, $project) {
     $i = 0;
-    foreach ($task_list as $key => $category) {
-        if ($category['category_task'] == $project && !$category['complete_task']) {
+    foreach ($task_list as $key => $task) {
+        if ($task['project_id'] == $project['id'] && !$task['state']) {
             $i++;
         }
     }
