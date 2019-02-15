@@ -18,8 +18,8 @@
 </div>
 <table class="tasks">
     <?php foreach ($tasks as $key => $item): ?>
-        <?php if (!$item['complete_task']): ?>
-            <tr class="tasks__item task <?=($item['date_task'] && (strtotime("+24 hours now") > strtotime($item['date_task'])) ? "task--important" : ""); ?>">
+        <?php if (!$item['state']): ?>
+            <tr class="tasks__item task <?=($item['date_do'] && (strtotime("+24 hours now") > strtotime($item['date_do'])) ? "task--important" : ""); ?>">
                 <td class="task__select">
                     <label class="checkbox task__checkbox">
                         <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
@@ -29,10 +29,10 @@
                 <td class="task__file">
                     <a class="download-link" href="#">Home.psd</a>
                 </td>
-                <td class="task__date"><?=esc($item['date_task']) ; ?></td>
+                <td class="task__date"><?=esc($item['date_do']) ; ?></td>
             </tr>
             <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
-        <?php elseif ($item['complete_task'] && $show_complete_tasks): ?>
+        <?php elseif ($item['state'] && $show_complete_tasks): ?>
             <tr class="tasks__item task task--completed">
                 <td class="task__select">
                     <label class="checkbox task__checkbox">
@@ -40,7 +40,7 @@
                         <span class="checkbox__text"><?=esc($item['title_task']) ; ?> </span>
                     </label>
                 </td>
-                <td class="task__date"><?=esc($item['date_task']) ; ?></td>
+                <td class="task__date"><?=esc($item['date_do']) ; ?></td>
                 <td class="task__controls">
                 </td>
             </tr>

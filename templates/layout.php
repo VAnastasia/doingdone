@@ -35,8 +35,8 @@
                     <?php foreach ($projects as $key => $value): ?>
                         <ul class="main-navigation__list">
                             <li class="main-navigation__list-item">
-                                <a class="main-navigation__list-item-link" href="#"><?=$value; ?> </a>
-                                <span class="main-navigation__list-item-count"><?=count_item($tasks, $value) ; ?></span>
+                                <a class="main-navigation__list-item-link" href="#"><?=$value['title_project']; ?> </a>
+                                <span class="main-navigation__list-item-count"><?=count_item($tasks, $value); ?></span>
                             </li>
                         </ul>
                     <?php endforeach; ?>
