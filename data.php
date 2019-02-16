@@ -35,14 +35,14 @@ $tasks_array = [
 
     [
         'title_task' => 'Купить корм для кота',
-        'date_task' => 'Нет',
+        'date_task' => '',
         'category_task' => $projects_array[3],
         'complete_task' => 0
     ],
 
     [
         'title_task' => 'Заказать пиццу',
-        'date_task' => 'Нет',
+        'date_task' => '',
         'category_task' => $projects_array[3],
         'complete_task' => 0
     ]
