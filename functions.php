@@ -22,13 +22,13 @@ $show_complete_tasks = rand(0, 1);
 
 //функция подсчета задач
 function count_item($task_list, $project) {
-    $i = 0;
-    foreach ($task_list as $key => $task) {
-        if ($task['project_id'] == $project['id'] && !$task['state']) {
-            $i++;
+    $count = 0;
+    foreach ($task_list as $key => $value) {
+        if ($value['title_project'] == $project) {
+            $count = $value['count_task'];
         }
     }
-    return $i;
+    return $count;
 }
 
 //функция фильтрации задач

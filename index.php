@@ -2,7 +2,7 @@
 
 require_once('functions.php');
 
-$user_id = 2;
+$user_id = 3;
 $safe_id = intval($user_id);
 
 $connect = mysqli_connect("localhost", "root", "", "todolist");
@@ -17,6 +17,20 @@ $projects = fetch_data($connect, $sql);
 $sql = "SELECT * FROM tasks WHERE user_id = " . $safe_id;
 $tasks = fetch_data($connect, $sql);
 
+if(isset($_GET['project_id'])) {
+    $sql = "SELECT * FROM tasks WHERE user_id = " . $safe_id . " AND project_id = " . $_GET['project_id'];
+    $tasks = fetch_data($connect, $sql);
+
+    if(empty($tasks)) {
+        header("HTTP/1.0 404 Not Found");
+        exit();
+    }
+}
+
+$sql = "SELECT title_project, COUNT(title_task) AS count_task FROM tasks JOIN projects ON tasks.project_id = projects.id
+WHERE state = 0 GROUP BY title_project";
+$tasks_count = fetch_data($connect, $sql);
+
 $page_content = include_template('index.php', [
     'tasks' => $tasks,
     'show_complete_tasks' => $show_complete_tasks
@@ -24,6 +38,7 @@ $page_content = include_template('index.php', [
 
 $layout_content = include_template('layout.php', [
     'tasks' => $tasks,
+    'tasks_count' => $tasks_count,
     'content' => $page_content,
     'projects' => $projects,
     'title' => 'Дела в порядке',
