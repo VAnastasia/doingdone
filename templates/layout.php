@@ -33,7 +33,7 @@
                 <h2 class="content__side-heading">Проекты</h2>
                 <nav class="main-navigation">
                     <?php foreach ($projects as $key => $value): ?>
-                        <ul class="main-navigation__list">
+                        <ul class="main-navigation__list <?=((isset($_GET['project_id'])) && $value['id'] == $_GET['project_id'] ? "main-navigation__list-item--active" : "");?>">
                             <li class="main-navigation__list-item">
                                 <a class="main-navigation__list-item-link" href="index.php?project_id=<?=$value['id'];?>"><?=$value['title_project']; ?> </a>
                                 <span class="main-navigation__list-item-count"><?=count_item($tasks_count, $value['title_project']); ?></span>
