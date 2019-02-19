@@ -2,7 +2,7 @@
 
 require_once('functions.php');
 
-$user_id = 1;
+$user_id = 3;
 $safe_id = intval($user_id);
 
 $connect = mysqli_connect("localhost", "root", "", "todolist");
@@ -14,11 +14,12 @@ $user = fetch_data($connect, $sql);
 $sql = "SELECT * FROM projects WHERE user_id = " . $safe_id;
 $projects = fetch_data($connect, $sql);
 
-$sql = "SELECT * FROM tasks WHERE user_id = " . $safe_id;
+$sql = "SELECT * FROM tasks WHERE user_id = " . $safe_id . " ORDER BY date_create DESC";
 $tasks = fetch_data($connect, $sql);
 
 if(isset($_GET['project_id'])) {
-    $sql = "SELECT * FROM tasks WHERE user_id = " . $safe_id . " AND project_id = " . $_GET['project_id'];
+    $project_id = intval($_GET['project_id']);
+    $sql = "SELECT * FROM tasks WHERE user_id = " . $safe_id . " AND project_id = " . $project_id . " ORDER BY date_create DESC";
     $tasks = fetch_data($connect, $sql);
 
     if(empty($tasks)) {
