@@ -7,14 +7,14 @@ USE todolist;
 CREATE TABLE users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   date_add DATETIME,
-  name CHAR(255),
-  email CHAR(255) NOT NULL,
-  password CHAR(64)
+  name VARCHAR(255),
+  email VARCHAR(255) NOT NULL,
+  password VARCHAR(64)
 );
 
 CREATE TABLE projects (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  title_project CHAR(255),
+  title_project VARCHAR(255),
   user_id INT
 );
 
@@ -23,9 +23,9 @@ CREATE TABLE tasks (
   date_create DATETIME,
   date_done DATETIME,
   state TINYINT DEFAULT 0,
-  title_task CHAR(255),
-  file CHAR(255),
-  date_do DATETIME,
+  title_task VARCHAR(255),
+  file VARCHAR(255),
+  date_do VARCHAR(10),
   user_id INT,
   project_id INT
 );

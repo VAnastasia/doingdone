@@ -22,7 +22,7 @@
             <tr class="tasks__item task <?=($item['date_do'] && (strtotime("+24 hours now") > strtotime($item['date_do'])) ? "task--important" : ""); ?>">
                 <td class="task__select">
                     <label class="checkbox task__checkbox">
-                        <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
+                        <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="<?=$item['id'];?>">
                         <span class="checkbox__text"><?=esc($item['title_task']) ; ?></span>
                     </label>
                 </td>
@@ -36,7 +36,7 @@
             <tr class="tasks__item task task--completed">
                 <td class="task__select">
                     <label class="checkbox task__checkbox">
-                        <input class="checkbox__input visually-hidden" type="checkbox" checked>
+                        <input class="checkbox__input visually-hidden" type="checkbox" checked">
                         <span class="checkbox__text"><?=esc($item['title_task']) ; ?> </span>
                     </label>
                 </td>

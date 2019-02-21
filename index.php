@@ -2,7 +2,7 @@
 
 require_once('functions.php');
 
-$user_id = 3;
+$user_id = 1;
 $safe_id = intval($user_id);
 
 $connect = mysqli_connect("localhost", "root", "", "todolist");
@@ -23,7 +23,7 @@ if(isset($_GET['project_id'])) {
     $tasks = fetch_data($connect, $sql);
 
     if(empty($tasks)) {
-        header("HTTP/1.0 404 Not Found");
+        http_response_code(404);
         exit();
     }
 }

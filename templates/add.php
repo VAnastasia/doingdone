@@ -1,6 +1,8 @@
 <h2 class="content__main-heading">Добавление задачи</h2>
 
+<p class="form__message"><?=(!empty($errors) ? "Пожалуйста, исправьте ошибки в форме" : "");?></p>
 <form class="form"  action="add.php" method="post" enctype="multipart/form-data">
+
     <div class="form__row">
         <label class="form__label" for="name">Название <sup>*</sup></label>
 
@@ -12,8 +14,9 @@
         <label class="form__label" for="project">Проект</label>
 
         <select class="form__input form__input--select <?=(isset($errors['project']) ? "form__input--error" : "");?>" name="project" id="project">
+            <option value="">Выберите проект</option>
             <?php foreach ($projects as $value): ?>
-                <option value="<?=$value['title_project'];?>"><?=$value['title_project'];?></option>
+                <option value="<?=$value['title_project'];?>" <?=(isset($_POST['project']) && ($value['title_project'] == $_POST['project']) ? "selected" : "");?> ><?=$value['title_project'];?></option>
             <?php endforeach; ?>
         </select>
         <p class="form__message"><?=(isset($errors['project']) ? $errors['project'] : "");?></p>
