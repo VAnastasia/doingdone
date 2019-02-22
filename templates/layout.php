@@ -16,7 +16,7 @@
                 <img src="img/logo.png" width="153" height="42" alt="Логотип Дела в порядке">
             </a>
             <div class="main-header__side">
-                <a class="main-header__side-item button button--plus open-modal" href="pages/form-task.html">Добавить задачу</a>
+                <a class="main-header__side-item button button--plus open-modal" href="add.php">Добавить задачу</a>
                 <div class="main-header__side-item user-menu">
                     <div class="user-menu__image">
                         <img src="img/user.png" width="40" height="40" alt="Пользователь">
@@ -33,7 +33,7 @@
                 <h2 class="content__side-heading">Проекты</h2>
                 <nav class="main-navigation">
                     <?php foreach ($projects as $key => $value): ?>
-                        <ul class="main-navigation__list">
+                        <ul class="main-navigation__list <?=((isset($_GET['project_id'])) && $value['id'] == $_GET['project_id'] ? "main-navigation__list-item--active" : "");?>">
                             <li class="main-navigation__list-item">
                                 <a class="main-navigation__list-item-link" href="index.php?project_id=<?=$value['id'];?>"><?=$value['title_project']; ?> </a>
                                 <span class="main-navigation__list-item-count"><?=count_item($tasks_count, $value['title_project']); ?></span>
@@ -56,7 +56,7 @@
             <p>© 2019, «Дела в порядке»</p>
             <p>Веб-приложение для удобного ведения списка дел.</p>
         </div>
-        <a class="main-footer__button button button--plus" href="pages/form-task.html">Добавить задачу</a>
+        <a class="main-footer__button button button--plus" href="add.php">Добавить задачу</a>
         <div class="main-footer__social social">
             <span class="visually-hidden">Мы в соцсетях:</span>
             <a class="social__link social__link--facebook" href="#">

@@ -22,21 +22,21 @@
             <tr class="tasks__item task <?=($item['date_do'] && (strtotime("+24 hours now") > strtotime($item['date_do'])) ? "task--important" : ""); ?>">
                 <td class="task__select">
                     <label class="checkbox task__checkbox">
-                        <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
+                        <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="<?=$item['id'];?>">
                         <span class="checkbox__text"><?=esc($item['title_task']) ; ?></span>
                     </label>
                 </td>
                 <td class="task__file">
-                    <a class="download-link" href="#">Home.psd</a>
+                    <a class="<?=($item['file'] ? "download-link" : "");?>" href="<?=$item['file'];?>" target="_blank"><?=esc($item['file']) ; ?></a>
                 </td>
-                <td class="task__date"><?=esc($item['date_do']) ; ?></td>
+                <td class="task__date"><?=($item['date_do'] ? $item['date_do'] : ""); ?></td>
             </tr>
             <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
         <?php elseif ($item['state'] && $show_complete_tasks): ?>
             <tr class="tasks__item task task--completed">
                 <td class="task__select">
                     <label class="checkbox task__checkbox">
-                        <input class="checkbox__input visually-hidden" type="checkbox" checked>
+                        <input class="checkbox__input visually-hidden" type="checkbox" checked">
                         <span class="checkbox__text"><?=esc($item['title_task']) ; ?> </span>
                     </label>
                 </td>
