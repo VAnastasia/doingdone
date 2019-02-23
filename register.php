@@ -16,6 +16,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
+    if (filter_var($form['email'], FILTER_VALIDATE_EMAIL)) {
+        unset($errors['email']);
+    } else {
+        $errors['email'] = "Введите e-mail";
+    }
+
     if (empty($errors)) {
         $email = mysqli_real_escape_string($connect, $form['email']);
         $sql = "SELECT id FROM users WHERE email = '" . $email . "'";
@@ -24,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (mysqli_num_rows($res)) {
             $errors['email'] = 'Пользователь с этим email уже зарегистрирован';
         }
+
         $password = password_hash($form['password'], PASSWORD_DEFAULT);
 
         $sql = "INSERT INTO users (date_add, name, email, password) VALUES (NOW(), ?, ?, ?)";
