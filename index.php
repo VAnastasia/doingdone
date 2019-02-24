@@ -15,6 +15,12 @@ if(isset($_GET['project_id'])) {
     }
 }
 
+if(isset($_GET['show_completed']) && $_GET['show_completed']) {
+    $show_complete_tasks = 1;
+} else {
+    $show_complete_tasks = 0;
+}
+
 $page_content = include_template('index.php', [
     'tasks' => $tasks,
     'show_complete_tasks' => $show_complete_tasks
