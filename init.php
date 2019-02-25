@@ -2,7 +2,10 @@
 
 require_once('functions.php');
 
-$user_id = 3;
+session_start();
+
+$user_id = ($_SESSION['user']['id'] ?? NULL);
+
 $safe_id = intval($user_id);
 
 $connect = mysqli_connect("localhost", "root", "", "todolist");

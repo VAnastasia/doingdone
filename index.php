@@ -21,19 +21,27 @@ if(isset($_GET['show_completed']) && $_GET['show_completed']) {
     $show_complete_tasks = 0;
 }
 
-$page_content = include_template('index.php', [
-    'tasks' => $tasks,
-    'show_complete_tasks' => $show_complete_tasks
-]);
+if (!empty($_SESSION)) {
+    $page_content = include_template('index.php', [
+        'tasks' => $tasks,
+        'show_complete_tasks' => $show_complete_tasks
+    ]);
 
-$layout_content = include_template('layout.php', [
-    'tasks' => $tasks,
-    'tasks_count' => $tasks_count,
-    'content' => $page_content,
-    'projects' => $projects,
-    'title' => 'Дела в порядке',
-    'user_name' => $user[0]['name']
-]);
+    $layout_content = include_template('layout.php', [
+        'tasks' => $tasks,
+        'tasks_count' => $tasks_count,
+        'content' => $page_content,
+        'projects' => $projects,
+        'title' => 'Дела в порядке',
+        'user_name' => $user[0]['name']
+    ]);
+
+} else {
+
+    $layout_content = include_template('guest.php', [
+        'title' => 'Дела в порядке'
+    ]);
+}
 
 print($layout_content);
 

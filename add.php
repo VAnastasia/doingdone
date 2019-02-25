@@ -63,7 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         $page_content = include_template('add.php', [
             'projects' => $projects,
-            'errors' => $errors
+            'errors' => $errors,
+            'task' => $task
             ]);
         }
 } else {

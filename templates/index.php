@@ -40,9 +40,8 @@
                         <span class="checkbox__text"><?=esc($item['title_task']) ; ?> </span>
                     </label>
                 </td>
+                <td class="task__controls"></td>
                 <td class="task__date"><?=esc($item['date_do']) ; ?></td>
-                <td class="task__controls">
-                </td>
             </tr>
         <?php endif; ?>
     <?php endforeach; ?>

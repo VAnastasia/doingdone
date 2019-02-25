@@ -45,6 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     $page_content = include_template('register.php', [
+        'form' => $form,
         'errors' => $errors
     ]);
 
