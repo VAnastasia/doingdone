@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $res = mysqli_stmt_execute($stmt);
 
         if ($res) {
-            header("Location: /index.php");
+            header("Location: /auth.php");
             exit();
         }
         $page_content = include_template('register.php', []);
@@ -52,15 +52,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $page_content = include_template('register.php', []);
 }
 
-/*print('<pre>');
-print_r($form);
-print_r($errors);
-print('</pre>');*/
-
-
-
-$layout_content = include_template('layout-reg.php', [
+$layout_content = include_template('layout.php', [
     'content' => $page_content,
+    'tasks' => [],
+    'tasks_count' => [],
+    'projects' => [],
+    'user_name' => "",
     'title' => 'Дела в порядке | Регистрация'
 ]);
 
