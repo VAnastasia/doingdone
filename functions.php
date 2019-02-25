@@ -17,8 +17,6 @@ function include_template($name, $data) {
     return $result;
 };
 
-// показывать или нет выполненные задачи
-$show_complete_tasks = rand(0, 1);
 
 //функция подсчета задач
 function count_item($task_list, $project) {
