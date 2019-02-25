@@ -5,7 +5,7 @@
     <div class="form__row">
         <label class="form__label" for="name">Название <sup>*</sup></label>
 
-        <input class="form__input <?=(isset($errors['name']) ? "form__input--error" : "");?>" type="text" name="name" id="name" placeholder="Введите название" value="<?=($_POST['name'] ?? ""); ?>" >
+        <input class="form__input <?=(isset($errors['name']) ? "form__input--error" : "");?>" type="text" name="name" id="name" placeholder="Введите название" value="<?=($task['name'] ?? ""); ?>" >
         <p class="form__message"><?=($errors['name'] ?? "");?></p>
     </div>
 
@@ -15,7 +15,7 @@
         <select class="form__input form__input--select <?=(isset($errors['project']) ? "form__input--error" : "");?>" name="project" id="project">
             <option value="" label="Выберите проект"></option>
             <?php foreach ($projects as $value): ?>
-                <option value="<?=$value['title_project'];?>" <?=(isset($_POST['project']) && ($value['title_project'] == $_POST['project']) ? "selected" : "");?> ><?=$value['title_project'];?></option>
+                <option value="<?=$value['title_project'];?>" <?=(isset($task['project']) && ($value['title_project'] == $task['project']) ? "selected" : "");?> ><?=$value['title_project'];?></option>
             <?php endforeach; ?>
         </select>
         <p class="form__message"><?=($errors['project'] ?? "");?></p>
@@ -24,7 +24,7 @@
     <div class="form__row">
         <label class="form__label" for="date">Дата выполнения</label>
 
-        <input class="form__input form__input--date <?=(isset($errors['date']) ? "form__input--error" : "");?>" type="date" name="date" id="date" placeholder="Введите дату в формате ДД.ММ.ГГГГ" value="<?=($_POST['date'] ?? "");?>" >
+        <input class="form__input form__input--date <?=(isset($errors['date']) ? "form__input--error" : "");?>" type="date" name="date" id="date" placeholder="Введите дату в формате ДД.ММ.ГГГГ" value="<?=($task['date'] ?? "");?>" >
         <p class="form__message"><?=($errors['date'] ?? "");?></p>
     </div>
 

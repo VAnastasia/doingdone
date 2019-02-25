@@ -1,74 +1,52 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
-    <title><?= $title; ?></title>
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/flatpickr.min.css">
+    <title><?=$title;?></title>
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
-<body>
+
+<body class="body-background">
 <h1 class="visually-hidden">Дела в порядке</h1>
+
 <div class="page-wrapper">
-    <div class="container container--with-sidebar">
+    <div class="container">
         <header class="main-header">
-            <a href="/">
-                <img src="img/logo.png" width="153" height="42" alt="Логотип Дела в порядке">
+            <a href="#">
+                <img src="../img/logo.png" width="153" height="42" alt="Логитип Дела в порядке">
             </a>
 
             <div class="main-header__side">
-                <?php if (empty($user_name)) : ?>
-                    <a class="main-header__side-item button button--transparent" href="auth.php">Войти</a>
-                <?php else :?>
-                    <a class="main-header__side-item button button--plus open-modal" href="add.php">Добавить задачу</a>
-                    <div class="main-header__side-item user-menu">
-                        <div class="user-menu__image">
-                            <img src="img/user.png" width="40" height="40" alt="Пользователь">
-                        </div>
-                        <div class="user-menu__data">
-                            <p><?= $user_name; ?></p>
-                            <a href="logout.php">Выйти</a>
-                        </div>
-                    </div>
-                <?php endif; ?>
+                <a class="main-header__side-item button button--transparent" href="auth.php">Войти</a>
             </div>
         </header>
+
         <div class="content">
-            <section class="content__side">
-                <?php if (empty($user_name)) :?>
-                    <p class="content__side-info">Если у вас уже есть аккаунт, авторизуйтесь на сайте</p>
-                    <a class="button button--transparent content__side-button" href="auth.php">Войти</a>
-                <?php else :?>
-                    <h2 class="content__side-heading">Проекты</h2>
-                    <nav class="main-navigation">
-                        <?php foreach ($projects as $key => $value): ?>
-                            <ul class="main-navigation__list <?=(isset($_GET['project_id']) && $value['id'] == $_GET['project_id'] ? "main-navigation__list-item--active" : "");?>">
-                                <li class="main-navigation__list-item">
-                                    <a class="main-navigation__list-item-link" href="index.php?project_id=<?=$value['id'];?>"><?=$value['title_project']; ?> </a>
-                                    <span class="main-navigation__list-item-count"><?=count_item($tasks_count, $value['title_project']); ?></span>
-                                </li>
-                            </ul>
-                        <?php endforeach; ?>
-                    </nav>
-                    <a class="button button--transparent button--plus content__side-button"
-                       href="pages/form-project.html" target="project_add">Добавить проект</a>
-                <?php endif ;?>
+            <section class="welcome">
+                <h2 class="welcome__heading">«Дела в порядке»</h2>
+
+                <div class="welcome__text">
+                    <p>«Дела в порядке» — это веб приложение для удобного ведения списка дел. Сервис помогает пользователям не забывать о предстоящих важных событиях и задачах.</p>
+
+                    <p>После создания аккаунта, пользователь может начать вносить свои дела, деля их по проектам и указывая сроки.</p>
+                </div>
+
+                <a class="welcome__button button" href="register.php">Зарегистрироваться</a>
             </section>
-            <main class="content__main">
-                <?= $content; ?>
-            </main>
         </div>
     </div>
 </div>
+
 <footer class="main-footer">
     <div class="container">
         <div class="main-footer__copyright">
             <p>© 2019, «Дела в порядке»</p>
+
             <p>Веб-приложение для удобного ведения списка дел.</p>
         </div>
-        <?php if (!empty($user_name)):?>
-            <a class="main-footer__button button button--plus" href="add.php">Добавить задачу</a>
-        <?php endif;?>
+
         <div class="main-footer__social social">
             <span class="visually-hidden">Мы в соцсетях:</span>
             <a class="social__link social__link--facebook" href="#">
@@ -79,7 +57,7 @@
                           d="M14.26 20.983h-2.816v-6.626H10.04v-2.28h1.404v-1.364c0-1.862.79-2.922 3.04-2.922h1.87v2.28h-1.17c-.876 0-.972.322-.972.916v1.14h2.212l-.245 2.28h-1.92v6.625z"/>
                 </svg>
             </a><span class="visually-hidden">
-          ,</span>
+        ,</span>
             <a class="social__link social__link--twitter" href="#">
                 <span class="visually-hidden">Twitter</span>
                 <svg width="27" height="27" viewBox="0 0 27 27" xmlns="http://www.w3.org/2000/svg">
@@ -88,7 +66,7 @@
                           d="M18.38 10.572c.525-.336.913-.848 1.092-1.445-.485.305-1.02.52-1.58.635-.458-.525-1.12-.827-1.816-.83-1.388.063-2.473 1.226-2.44 2.615-.002.2.02.4.06.596-2.017-.144-3.87-1.16-5.076-2.78-.22.403-.335.856-.332 1.315-.01.865.403 1.68 1.104 2.188-.397-.016-.782-.13-1.123-.333-.03 1.207.78 2.272 1.95 2.567-.21.06-.43.09-.653.088-.155.015-.313.015-.47 0 .3 1.045 1.238 1.777 2.324 1.815-.864.724-1.956 1.12-3.083 1.122-.198.013-.397.013-.595 0 1.12.767 2.447 1.18 3.805 1.182 4.57 0 7.066-3.992 7.066-7.456v-.34c.49-.375.912-.835 1.24-1.357-.465.218-.963.36-1.473.42z"/>
                 </svg>
             </a><span class="visually-hidden">
-          ,</span>
+        ,</span>
             <a class="social__link social__link--instagram" href="#">
                 <span class="visually-hidden">Instagram</span>
                 <svg width="27" height="27" viewBox="0 0 27 27" xmlns="http://www.w3.org/2000/svg">
@@ -107,15 +85,16 @@
                 </svg>
             </a>
         </div>
+
         <div class="main-footer__developed-by">
             <span class="visually-hidden">Разработано:</span>
+
             <a href="https://htmlacademy.ru/intensive/php">
-                <img src="img/htmlacademy.svg" alt="HTML Academy" width="118" height="40">
+                <img src="../img/htmlacademy.svg" alt="HTML Academy" width="118" height="40">
             </a>
         </div>
     </div>
 </footer>
-<script src="flatpickr.js"></script>
-<script src="script.js"></script>
+
 </body>
 </html>
