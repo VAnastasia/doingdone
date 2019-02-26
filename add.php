@@ -43,12 +43,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (empty($errors)) {
-        $sql = 'SELECT * FROM projects WHERE user_id = ' . $safe_id . ' AND title_project = "' . $task['project'] . '"';
+        $sql = 'SELECT * FROM projects WHERE user_id = ' . $user_id . ' AND title_project = "' . $task['project'] . '"';
         $project_id = fetch_data($connect, $sql);
         $task['project_id'] = $project_id[0]['id'];
 
         $sql = 'INSERT INTO tasks (date_create, state, title_task, file, date_do, user_id, project_id) VALUES (NOW(), 0, ?, ?, ?, ?, ?)';
-        $stmt = db_get_prepare_stmt($connect, $sql, [ $task['name'], $task['file'], $task['date'], $safe_id, $task['project_id'] ]);
+        $stmt = db_get_prepare_stmt($connect, $sql, [ $task['name'], $task['file'], $task['date'], $user_id, $task['project_id'] ]);
         $res = mysqli_stmt_execute($stmt);
 
         if ($res) {
