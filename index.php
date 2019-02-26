@@ -38,11 +38,7 @@ if(isset($_GET['task_id']) && isset($_GET['check'])) {
         header("Location: /index.php");
         exit();
     }
-
-/*
-    print('<pre>');
-    print_r($task);
-    print('</pre>');*/
+    
 }
 
 if (!empty($_SESSION)) {
