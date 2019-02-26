@@ -48,14 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ]);
 }
 
-/*print('<pre>');
-print_r($project);
-print_r($errors);
-print('</pre>');*/
-
-
-
-
 $layout_content = include_template('layout.php', [
     'tasks' => $tasks,
     'tasks_count' => $tasks_count,
