@@ -36,7 +36,7 @@ if(isset($_GET['task_id']) && isset($_GET['check'])) {
 
     if ($res) {
         header("Location: /index.php");
-        //exit();
+        exit();
     }
 }
 
