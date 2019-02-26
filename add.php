@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
        }
     }
     if (!$count) {
-        $errors['project'] = "Выбран несуществующий проект";
+        $errors['project'] = "Выберите проект";
     }
 
 
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (empty($errors)) {
-        $sql = 'SELECT * FROM projects WHERE user_id = ' . $safe_id . ' AND title_project LIKE "' . $task['project'] . '"';
+        $sql = 'SELECT * FROM projects WHERE user_id = ' . $safe_id . ' AND title_project = "' . $task['project'] . '"';
         $project_id = fetch_data($connect, $sql);
         $task['project_id'] = $project_id[0]['id'];
 
