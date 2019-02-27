@@ -25,7 +25,7 @@ CREATE TABLE tasks (
   state TINYINT DEFAULT 0,
   title_task VARCHAR(255),
   file VARCHAR(255),
-  date_do VARCHAR(10),
+  date_do DATETIME,
   user_id INT,
   project_id INT
 );
@@ -37,5 +37,5 @@ CREATE INDEX title_project ON projects(title_project);
 CREATE INDEX date_create ON tasks(date_create);
 CREATE INDEX date_done ON tasks(date_done);
 CREATE INDEX date_do ON tasks(date_do);
-CREATE INDEX title_task ON tasks(title_task);
+CREATE FULLTEXT INDEX title_task ON tasks(title_task);
 CREATE INDEX state ON tasks(state);

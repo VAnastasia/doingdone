@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
        }
     }
     if (!$count) {
-        $errors['project'] = "Выбран несуществующий проект";
+        $errors['project'] = "Выберите проект";
     }
 
 
@@ -32,7 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         unset($errors['date']);
     }
 
-
     if (is_uploaded_file($_FILES['preview']['tmp_name'])) {
         $file_name = $_FILES['preview']['name'];
         $file_path = $_FILES['preview']['tmp_name'];
@@ -43,12 +42,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (empty($errors)) {
-        $sql = 'SELECT * FROM projects WHERE user_id = ' . $safe_id . ' AND title_project LIKE "' . $task['project'] . '"';
+        $sql = 'SELECT * FROM projects WHERE user_id = ' . $user_id . ' AND title_project = "' . $task['project'] . '"';
         $project_id = fetch_data($connect, $sql);
         $task['project_id'] = $project_id[0]['id'];
 
-        $sql = 'INSERT INTO tasks (date_create, state, title_task, file, date_do, user_id, project_id) VALUES (NOW(), 0, ?, ?, ?, ?, ?)';
-        $stmt = db_get_prepare_stmt($connect, $sql, [ $task['name'], $task['file'], $task['date'], $safe_id, $task['project_id'] ]);
+        $sql = 'INSERT INTO tasks (date_create, state, title_task, file, date_do, user_id, project_id) VALUES (NOW(), 0, ?, ?, STR_TO_DATE(?, "%d.%m.%Y"), ?, ?)';
+        $stmt = db_get_prepare_stmt($connect, $sql, [ $task['name'], $task['file'], $task['date'], $user_id, $task['project_id'] ]);
         $res = mysqli_stmt_execute($stmt);
 
         if ($res) {
