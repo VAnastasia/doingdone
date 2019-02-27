@@ -36,6 +36,21 @@ if(isset($_GET['task_id']) && isset($_GET['check'])) {
 
     if ($res) {
         header("Location: /index.php");
+    }
+}
+
+if(isset($_GET['time'])) {
+    if($_GET['time'] == 'today') {
+        $sql = "SELECT * FROM tasks WHERE user_id = " . $user_id . " AND DAY(date_do) = DAY(NOW())";
+        $tasks = fetch_data($connect, $sql);
+    } elseif ($_GET['time'] == 'tomorrow') {
+        $sql = "SELECT * FROM tasks WHERE user_id = " . $user_id . " AND DAY(date_do) = DAY(DATE_ADD(NOW(), INTERVAL 1 DAY))";
+        $tasks = fetch_data($connect, $sql);
+    } elseif ($_GET['time'] == 'overdue') {
+        $sql = "SELECT * FROM tasks WHERE user_id = " . $user_id . " AND date_do < NOW() ORDER BY date_do ASC";
+        $tasks = fetch_data($connect, $sql);
+    } else {
+        http_response_code(404);
         exit();
     }
 }

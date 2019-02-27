@@ -26,7 +26,7 @@
                             <img src="img/user.png" width="40" height="40" alt="Пользователь">
                         </div>
                         <div class="user-menu__data">
-                            <p><?= $user_name; ?></p>
+                            <p><?= htmlspecialchars($user_name); ?></p>
                             <a href="logout.php">Выйти</a>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                         <?php foreach ($projects as $key => $value): ?>
                             <ul class="main-navigation__list <?=(isset($_GET['project_id']) && $value['id'] == $_GET['project_id'] ? "main-navigation__list-item--active" : "");?>">
                                 <li class="main-navigation__list-item">
-                                    <a class="main-navigation__list-item-link" href="index.php?project_id=<?=$value['id'];?>"><?=esc($value['title_project']); ?> </a>
+                                    <a class="main-navigation__list-item-link" href="index.php?project_id=<?=$value['id'];?>"><?=htmlspecialchars($value['title_project']); ?> </a>
                                     <span class="main-navigation__list-item-count"><?=count_item($tasks_count, $value['title_project']); ?></span>
                                 </li>
                             </ul>

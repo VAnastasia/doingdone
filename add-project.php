@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $count = 0;
     foreach ($projects as $value) {
-        if ($value['title_project'] === $project['name']) {
+        if (mb_strtolower($value['title_project'], 'UTF-8') == mb_strtolower($project['name'], 'UTF-8')) {
             $count++;
         }
     }

@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Шаблонизатор
+ *
+ * @param $name string Название шаблона
+ * @param $data array Данные, используемые в шаблоне
+ *
+ * @return false|string
+ */
 function include_template($name, $data) {
     $name = 'templates/' . $name;
     $result = '';
@@ -17,8 +25,14 @@ function include_template($name, $data) {
     return $result;
 };
 
-
-//функция подсчета задач
+/**
+ * функция подсчета задач
+ *
+ * @param $task_list string список задач
+ * @param $project
+ *
+ * @return int|mixed
+ */
 function count_item($task_list, $project) {
     $count = 0;
     foreach ($task_list as $key => $value) {
@@ -29,14 +43,14 @@ function count_item($task_list, $project) {
     return $count;
 }
 
-//функция фильтрации задач
-function esc($str) {
-    $text = strip_tags($str);
-
-    return $text;
-}
-
-//функция для получения массива из БД
+/**
+ * функция для получения массива из БД
+ *
+ * @param $connect mysqli Ресурс соединения
+ * @param $sql string SQL запрос
+ *
+ * @return array|null
+ */
 function fetch_data ($connect, $sql) {
     if(!$connect) {
         print('Ошибка подключения: ' . mysqli_connect_error());
@@ -98,11 +112,11 @@ function db_get_prepare_stmt($link, $sql, $data = []) {
     return $stmt;
 }
 
-
 /**
  * проверяет корректность даты и соответствие формату "ДД.ММ.ГГГГ"
  *
- * @param $date
+ * @param $date string дата
+ *
  * @return bool|int
  */
 function correct_format_day ($date) {
