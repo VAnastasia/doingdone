@@ -4,6 +4,10 @@ require_once('init.php');
 require_once('functions.php');
 require_once('data.php');
 
+if(empty($_SESSION)) {
+    header("Location: index.php");
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $project = $_POST;
 
@@ -27,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $res = mysqli_stmt_execute($stmt);
 
         if ($res) {
-            header("Location: /index.php");
+            header("Location: index.php");
             exit();
         }
 
@@ -49,6 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 $layout_content = include_template('layout.php', [
+    'background' => "",
     'tasks' => $tasks,
     'tasks_count' => $tasks_count,
     'content' => $page_content,

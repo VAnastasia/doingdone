@@ -15,6 +15,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
+    if (!filter_var($form['email'], FILTER_VALIDATE_EMAIL)) {
+        $errors['email'] = "Введите e-mail";
+    }
+
     $email = mysqli_real_escape_string($connect, $form['email']);
     $sql = "SELECT * FROM users WHERE email = '" . $email . "'";
     $res = mysqli_query($connect, $sql);
@@ -37,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             'errors' => $errors
         ]);
     } else {
-        header("Location: /index.php");
+        header("Location: index.php");
         exit();
     }
 
@@ -46,6 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 $layout_content = include_template('layout.php', [
+    'background' => "",
     'content' => $page_content,
     'tasks' => [],
     'tasks_count' => [],

@@ -35,7 +35,7 @@ if(isset($_GET['task_id']) && isset($_GET['check'])) {
     $res = mysqli_query($connect, $sql);
 
     if ($res) {
-        header("Location: /index.php");
+        header("Location: index.php");
     }
 }
 
@@ -62,6 +62,7 @@ if (!empty($_SESSION)) {
     ]);
 
     $layout_content = include_template('layout.php', [
+        'background' => "",
         'tasks' => $tasks,
         'tasks_count' => $tasks_count,
         'content' => $page_content,
@@ -71,9 +72,16 @@ if (!empty($_SESSION)) {
     ]);
 
 } else {
+    $page_content = include_template('guest.php', []);
 
-    $layout_content = include_template('guest.php', [
-        'title' => 'Дела в порядке'
+    $layout_content = include_template('layout.php', [
+        'background' => "body-background",
+        'title' => 'Дела в порядке',
+        'tasks' => [],
+        'tasks_count' => [],
+        'content' => $page_content,
+        'projects' => [],
+        'user_name' => ""
     ]);
 }
 

@@ -7,15 +7,14 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/flatpickr.min.css">
 </head>
-<body>
+<body class="<?=$background;?>">
 <h1 class="visually-hidden">Дела в порядке</h1>
 <div class="page-wrapper">
-    <div class="container container--with-sidebar">
+    <div class="container <?=($background ? "" : "container--with-sidebar");?>">
         <header class="main-header">
             <a href="/">
                 <img src="img/logo.png" width="153" height="42" alt="Логотип Дела в порядке">
             </a>
-
             <div class="main-header__side">
                 <?php if (empty($user_name)) : ?>
                     <a class="main-header__side-item button button--transparent" href="auth.php">Войти</a>
@@ -34,6 +33,7 @@
             </div>
         </header>
         <div class="content">
+            <?php if (!$background) :?>
             <section class="content__side">
                 <?php if (empty($user_name)) :?>
                     <p class="content__side-info">Если у вас уже есть аккаунт, авторизуйтесь на сайте</p>
@@ -54,6 +54,7 @@
                        href="add-project.php">Добавить проект</a>
                 <?php endif ;?>
             </section>
+            <?php endif;?>
             <main class="content__main">
                 <?= $content; ?>
             </main>

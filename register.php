@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $res = mysqli_stmt_execute($stmt);
 
         if ($res) {
-            header("Location: /auth.php");
+            header("Location: auth.php");
             exit();
         }
         $page_content = include_template('register.php', []);
@@ -54,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 $layout_content = include_template('layout.php', [
+    'background' => "",
     'content' => $page_content,
     'tasks' => [],
     'tasks_count' => [],
