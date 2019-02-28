@@ -1,6 +1,6 @@
 <h2 class="content__main-heading">Список задач</h2>
-<form class="search-form" action="index.php" method="post">
-    <input class="search-form__input" type="text" name="" value="" placeholder="Поиск по задачам">
+<form class="search-form" action="index.php" method="get">
+    <input class="search-form__input" type="text" name="search" value="" placeholder="Поиск по задачам">
     <input class="search-form__submit" type="submit" name="" value="Искать">
 </form>
 <div class="tasks-controls">
@@ -46,3 +46,4 @@
         <?php endif; ?>
     <?php endforeach; ?>
 </table>
+<p><?=(isset($_GET['search']) && empty($tasks) ? "Ничего не найдено по вашему запросу" : "");?></p>

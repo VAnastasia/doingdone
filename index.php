@@ -55,6 +55,12 @@ if(isset($_GET['time'])) {
     }
 }
 
+if(isset($_GET['search'])) {
+    $search = mysqli_real_escape_string($connect, $_GET['search']);
+    $sql = "SELECT * FROM tasks WHERE MATCH(title_task) AGAINST('" . $search . "' IN BOOLEAN MODE)";
+    $tasks = fetch_data($connect, $sql);
+}
+
 if (!empty($_SESSION)) {
     $page_content = include_template('index.php', [
         'tasks' => $tasks,
