@@ -28,7 +28,7 @@ function include_template($name, $data) {
 /**
  * функция подсчета задач
  *
- * @param $task_list string список задач
+ * @param $task_list array список задач
  * @param $project
  *
  * @return int|mixed

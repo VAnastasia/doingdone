@@ -11,7 +11,6 @@
         <a href="index.php?time=overdue" class="tasks-switch__item <?=(isset($_GET['time']) && $_GET['time'] == "overdue" ? "tasks-switch__item--active" : "");?>">Просроченные</a>
     </nav>
     <label class="checkbox">
-        <!--добавить сюда аттрибут "checked", если переменная $show_complete_tasks равна единице-->
         <input class="checkbox__input visually-hidden show_completed" type="checkbox" <?=($show_complete_tasks ? "checked" : ""); ?>>
         <span class="checkbox__text">Показывать выполненные</span>
     </label>
@@ -31,7 +30,6 @@
                 </td>
                 <td class="task__date"><?=($item['date_do'] ? date_format(date_create($item['date_do']), 'd.m.Y') : ""); ?></td>
             </tr>
-            <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
         <?php elseif ($item['state'] && $show_complete_tasks): ?>
             <tr class="tasks__item task task--completed">
                 <td class="task__select">

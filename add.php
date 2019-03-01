@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $count = 0;
     foreach ($projects as $value) {
-       if ($value['title_project'] === $task['project']) {
+       if ($value['title_project'] === $task['project'] || !$task['project']) {
           $count++;
        }
     }
@@ -25,10 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errors['project'] = "Выберите проект";
     }
 
-
     if (!correct_format_day($task['date'])) {
         $errors['date'] = "Введите дату в формате ДД.ММ.ГГГГ";
-    } elseif (strtotime($task['date']) <= strtotime("now")) {
+    } elseif (strtotime($task['date']) < strtotime('today')) {
         $errors['date'] = "Дата должна быть больше или равна текущей";
     }
 
@@ -46,9 +45,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (empty($errors)) {
-        $sql = 'SELECT * FROM projects WHERE user_id = ' . $user_id . ' AND title_project = "' . $task['project'] . '"';
-        $project_id = fetch_data($connect, $sql);
-        $task['project_id'] = $project_id[0]['id'];
+				if(!$task['project']) {
+					$task['project_id'] = 0;
+				} else {
+					$sql = 'SELECT * FROM projects WHERE user_id = ' . $user_id . ' AND title_project = "' . $task['project'] . '"';
+					$project_id = fetch_data($connect, $sql);
+					$task['project_id'] = $project_id[0]['id'];
+				}
 
         $sql = 'INSERT INTO tasks (date_create, state, title_task, file, date_do, user_id, project_id) VALUES (NOW(), 0, ?, ?, STR_TO_DATE(?, "%d.%m.%Y"), ?, ?)';
         $stmt = db_get_prepare_stmt($connect, $sql, [ $task['name'], $task['file'], $task['date'], $user_id, $task['project_id'] ]);

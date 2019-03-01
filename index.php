@@ -9,10 +9,13 @@ if(isset($_GET['project_id'])) {
     $sql = "SELECT * FROM tasks WHERE user_id = " . $user_id . " AND project_id = " . $project_id . " ORDER BY date_create DESC";
     $tasks = fetch_data($connect, $sql);
 
-    if(empty($tasks)) {
-        http_response_code(404);
-        exit();
-    }
+		$sql = "SELECT id FROM projects WHERE id = '" . $project_id . "'";
+		$res = mysqli_query($connect, $sql);
+
+		if (!mysqli_num_rows($res)) {
+			http_response_code(404);
+			exit();
+		}
 }
 
 if(isset($_GET['show_completed']) && $_GET['show_completed']) {
