@@ -15,7 +15,7 @@ $mailer->registerPlugin(new Swift_Plugins_LoggerPlugin($logger));
 
 $sql = "SELECT title_task, date_do, name, email FROM tasks JOIN users ON tasks.user_id = users.id WHERE state = 0 AND date_do != 0 AND DAY(date_do) = DAY(NOW()) AND HOUR(date_do) = HOUR(NOW()) ";
 $tasks = fetch_data($connect, $sql);
-i
+
 
 if (!empty($tasks)) {
     $post_message = '';
