@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sql = "SELECT * FROM users WHERE email = '" . $email . "'";
     $res = mysqli_query($connect, $sql);
 
-    $user = $res ? mysqli_fetch_array($res, MYSQLI_ASSOC) : NULL;
+    $user = $res ? mysqli_fetch_array($res, MYSQLI_ASSOC) : null;
 
     if (empty($errors) && $user) {
         if (password_verify($form['password'], $user['password'])) {

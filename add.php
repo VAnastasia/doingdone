@@ -4,7 +4,7 @@ require_once('init.php');
 require_once('functions.php');
 require_once('data.php');
 
-if(empty($_SESSION)) {
+if (empty($_SESSION)) {
     header("Location: index.php");
 }
 
@@ -17,9 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $count = 0;
     foreach ($projects as $value) {
-       if ($value['title_project'] === $task['project'] || !$task['project']) {
-          $count++;
-       }
+        if ($value['title_project'] === $task['project'] || !$task['project']) {
+            $count++;
+        }
     }
     if (!$count) {
         $errors['project'] = "Выберите проект";
@@ -38,23 +38,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (is_uploaded_file($_FILES['preview']['tmp_name'])) {
         $file_name = $_FILES['preview']['name'];
         $file_path = $_FILES['preview']['tmp_name'];
-        move_uploaded_file($file_path, __DIR__ . '/' . $file_name);
+        move_uploaded_file($file_path, __DIR__ . '/uploads/' . $file_name);
         $task['file'] = $file_name;
     } else {
         $task['file'] = "";
     }
 
     if (empty($errors)) {
-				if(!$task['project']) {
-					$task['project_id'] = 0;
-				} else {
-					$sql = 'SELECT * FROM projects WHERE user_id = ' . $user_id . ' AND title_project = "' . $task['project'] . '"';
-					$project_id = fetch_data($connect, $sql);
-					$task['project_id'] = $project_id[0]['id'];
-				}
+        if (!$task['project']) {
+            $task['project_id'] = 0;
+        } else {
+            $sql = 'SELECT * FROM projects WHERE user_id = ' . $user_id . ' AND title_project = "' . $task['project'] . '"';
+            $project_id = fetch_data($connect, $sql);
+            $task['project_id'] = $project_id[0]['id'];
+        }
 
-        $sql = 'INSERT INTO tasks (date_create, state, title_task, file, date_do, user_id, project_id) VALUES (NOW(), 0, ?, ?, STR_TO_DATE(?, "%d.%m.%Y"), ?, ?)';
-        $stmt = db_get_prepare_stmt($connect, $sql, [ $task['name'], $task['file'], $task['date'], $user_id, $task['project_id'] ]);
+        if (!$task['date']) {
+            $sql = 'INSERT INTO tasks (date_create, state, title_task, file, user_id, project_id) VALUES (NOW(), 0, ?, ?, ?, ?)';
+            $stmt = db_get_prepare_stmt($connect, $sql, [$task['name'], $task['file'], $user_id, $task['project_id']]);
+        } else {
+            $sql = 'INSERT INTO tasks (date_create, state, title_task, file, date_do, user_id, project_id) VALUES (NOW(), 0, ?, ?, STR_TO_DATE(?, "%d.%m.%Y"), ?, ?)';
+            $stmt = db_get_prepare_stmt($connect, $sql,
+                [$task['name'], $task['file'], $task['date'], $user_id, $task['project_id']]);
+        }
+
         $res = mysqli_stmt_execute($stmt);
 
         if ($res) {
@@ -71,8 +78,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             'projects' => $projects,
             'errors' => $errors,
             'task' => $task
-            ]);
-        }
+        ]);
+    }
 } else {
     $page_content = include_template('add.php', [
         'projects' => $projects

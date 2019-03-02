@@ -4,7 +4,7 @@ require_once('init.php');
 require_once('functions.php');
 require_once('data.php');
 
-if(empty($_SESSION)) {
+if (empty($_SESSION)) {
     header("Location: index.php");
 }
 
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (empty($errors)) {
         $sql = 'INSERT INTO projects (title_project, user_id) VALUES (?, ?)';
-        $stmt = db_get_prepare_stmt($connect, $sql, [ $project['name'], $user_id ]);
+        $stmt = db_get_prepare_stmt($connect, $sql, [$project['name'], $user_id]);
         $res = mysqli_stmt_execute($stmt);
 
         if ($res) {

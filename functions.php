@@ -8,7 +8,8 @@
  *
  * @return false|string
  */
-function include_template($name, $data) {
+function include_template($name, $data)
+{
     $name = 'templates/' . $name;
     $result = '';
 
@@ -23,7 +24,9 @@ function include_template($name, $data) {
     $result = ob_get_clean();
 
     return $result;
-};
+}
+
+;
 
 /**
  * функция подсчета задач
@@ -33,7 +36,8 @@ function include_template($name, $data) {
  *
  * @return int|mixed
  */
-function count_item($task_list, $project) {
+function count_item($task_list, $project)
+{
     $count = 0;
     foreach ($task_list as $key => $value) {
         if ($value['title_project'] == $project) {
@@ -51,14 +55,15 @@ function count_item($task_list, $project) {
  *
  * @return array|null
  */
-function fetch_data ($connect, $sql) {
-    if(!$connect) {
+function fetch_data($connect, $sql)
+{
+    if (!$connect) {
         print('Ошибка подключения: ' . mysqli_connect_error());
         exit();
     }
     $result = mysqli_query($connect, $sql);
 
-    if(!$result) {
+    if (!$result) {
         $error = mysqli_error($connect);
         print("Ошибка MySQL: " . $error);
         exit();
@@ -77,7 +82,8 @@ function fetch_data ($connect, $sql) {
  *
  * @return mysqli_stmt Подготовленное выражение
  */
-function db_get_prepare_stmt($link, $sql, $data = []) {
+function db_get_prepare_stmt($link, $sql, $data = [])
+{
     $stmt = mysqli_prepare($link, $sql);
 
     if ($data) {
@@ -89,12 +95,14 @@ function db_get_prepare_stmt($link, $sql, $data = []) {
 
             if (is_int($value)) {
                 $type = 'i';
-            }
-            else if (is_string($value)) {
-                $type = 's';
-            }
-            else if (is_double($value)) {
-                $type = 'd';
+            } else {
+                if (is_string($value)) {
+                    $type = 's';
+                } else {
+                    if (is_double($value)) {
+                        $type = 'd';
+                    }
+                }
             }
 
             if ($type) {
@@ -119,7 +127,8 @@ function db_get_prepare_stmt($link, $sql, $data = []) {
  *
  * @return bool|int
  */
-function correct_format_day ($date) {
+function correct_format_day($date)
+{
     $array = explode(".", $date);
     if (count($array) == 3) {
         $day = $array[0];
