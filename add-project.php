@@ -8,7 +8,7 @@ if (empty($_SESSION)) {
     header("Location: index.php");
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $project = $_POST;
 
     if (empty($project['name'])) {
@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $count = 0;
     foreach ($projects as $value) {
-        if (mb_strtolower($value['title_project'], 'UTF-8') == mb_strtolower($project['name'], 'UTF-8')) {
+        if (mb_strtolower($value['title_project'], 'UTF-8') === mb_strtolower($project['name'], 'UTF-8')) {
             $count++;
         }
     }

@@ -26,13 +26,12 @@ function include_template($name, $data)
     return $result;
 }
 
-;
 
 /**
  * функция подсчета задач
  *
  * @param $task_list array список задач
- * @param $project
+ * @param $project string название проекта
  *
  * @return int|mixed
  */
@@ -40,7 +39,7 @@ function count_item($task_list, $project)
 {
     $count = 0;
     foreach ($task_list as $key => $value) {
-        if ($value['title_project'] == $project) {
+        if ($value['title_project'] === $project) {
             $count = $value['count_task'];
         }
     }
@@ -82,8 +81,7 @@ function fetch_data($connect, $sql)
  *
  * @return mysqli_stmt Подготовленное выражение
  */
-function db_get_prepare_stmt($link, $sql, $data = [])
-{
+function db_get_prepare_stmt($link, $sql, $data = []) {
     $stmt = mysqli_prepare($link, $sql);
 
     if ($data) {
@@ -95,14 +93,12 @@ function db_get_prepare_stmt($link, $sql, $data = [])
 
             if (is_int($value)) {
                 $type = 'i';
-            } else {
-                if (is_string($value)) {
-                    $type = 's';
-                } else {
-                    if (is_double($value)) {
-                        $type = 'd';
-                    }
-                }
+            }
+            else if (is_string($value)) {
+                $type = 's';
+            }
+            else if (is_double($value)) {
+                $type = 'd';
             }
 
             if ($type) {
@@ -119,6 +115,7 @@ function db_get_prepare_stmt($link, $sql, $data = [])
 
     return $stmt;
 }
+
 
 /**
  * проверяет корректность даты и соответствие формату "ДД.ММ.ГГГГ"

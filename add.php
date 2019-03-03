@@ -8,7 +8,7 @@ if (empty($_SESSION)) {
     header("Location: index.php");
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $task = $_POST;
 
     if (empty($task['name'])) {
@@ -16,11 +16,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     $count = 0;
-    foreach ($projects as $value) {
-        if ($value['title_project'] === $task['project'] || !$task['project']) {
-            $count++;
+    if (!empty($projects)) {
+        foreach ($projects as $value) {
+            if ($value['title_project'] === $task['project'] || !$task['project']) {
+                $count++;
+            }
         }
+    } else {
+        $count = 1;
     }
+
     if (!$count) {
         $errors['project'] = "Выберите проект";
     }
