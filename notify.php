@@ -4,9 +4,9 @@ require_once 'vendor/autoload.php';
 require_once 'init.php';
 require_once 'functions.php';
 
-$transport = new Swift_SmtpTransport("smtp.mailtrap.io", 25);
-$transport->setUsername("6e0937830b38bd");
-$transport->setPassword("bf669a83048336");
+$transport = new Swift_SmtpTransport("phpdemo.ru", 25);
+$transport->setUsername("keks@phpdemo.ru");
+$transport->setPassword("htmlacademy");
 
 $mailer = new Swift_Mailer($transport);
 
@@ -55,7 +55,7 @@ if (!empty($tasks)) {
 
         $message->setTo([$tasks['email'] => $tasks['name']]);
         $message->setBody($post_message, 'text/plain');
-        $message->setFrom('7168785b4f-d789fc@inbox.mailtrap.io', 'Дела в порядке');
+        $message->setFrom('keks@phpdemo.ru', 'Дела в порядке');
 
         $result = $mailer->send($message);
 
