@@ -19,7 +19,6 @@ $tasks = fetch_data($connect, $sql);
 if (!empty($tasks)) {
 
     $users = [];
-
     foreach ($tasks as $task) {
         $users[] = $task['email'];
     }
@@ -31,32 +30,24 @@ if (!empty($tasks)) {
     }
 
     foreach ($tasks_user as $user) {
-
         foreach ($user as $tasks) {
-
             $task_list['name'] = '"' . $tasks['title_task'] . '"' . ' на ' . date_format(date_create($task['date_do']),
                     'H:i d.m.Y') . ' ';
         }
-
         if (count($user) > 1) {
             $task_list['name'] = "";
             foreach ($user as $tasks) {
-
                 $task_list['name'] .= '"' . $tasks['title_task'] . '"' . ' на ' . date_format(date_create($task['date_do']),
                         'H:i d.m.Y') . '; ';
             }
         }
 
-        $post_message = 'Уважаемый, ' . $tasks['name'] . '. У вас запланировано ' . $task_list['name'];
-        $post_address = $tasks['email'];
-        $post_name = $tasks['name'];
+        $post_message = 'Уважаемый(ая) ' . $tasks['name'] . '. У вас запланировано ' . $task_list['name'];
         $message = new Swift_Message();
         $message->setSubject("Уведомление от сервиса «Дела в порядке»");
-
         $message->setTo([$tasks['email'] => $tasks['name']]);
         $message->setBody($post_message, 'text/plain');
         $message->setFrom('keks@phpdemo.ru', 'Дела в порядке');
-
         $result = $mailer->send($message);
 
         if ($result) {
@@ -66,8 +57,3 @@ if (!empty($tasks)) {
         }
     }
 }
-
-
-
-
-

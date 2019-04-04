@@ -1,12 +1,19 @@
 'use strict';
 
 var $checkbox = document.getElementsByClassName('show_completed');
-
+//console.log(window.location.search.replace( '?', ''));
 if ($checkbox.length) {
   $checkbox[0].addEventListener('change', function (event) {
     var is_checked = +event.target.checked;
 
-    window.location = '/index.php?show_completed=' + is_checked;
+    var strGET = window.location.search.replace( '?', '');
+
+    if (strGET.indexOf('show_completed') === -1) {
+      window.location += '&show_completed=' + is_checked;
+    } else {
+      window.location = '/index.php?show_completed=' + is_checked;
+    }
+
   });
 }
 

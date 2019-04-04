@@ -17,18 +17,18 @@
 			</a>
 			<div class="main-header__side">
           <?php if (empty($user_name)) : ?>
-						<a class="main-header__side-item button button--transparent" href="auth.php">Войти</a>
+				<a class="main-header__side-item button button--transparent" href="auth.php">Войти</a>
           <?php else : ?>
-						<a class="main-header__side-item button button--plus open-modal" href="add.php">Добавить задачу</a>
-						<div class="main-header__side-item user-menu">
-							<div class="user-menu__image">
-								<img src="img/user.png" width="40" height="40" alt="Пользователь">
-							</div>
-							<div class="user-menu__data">
-								<p><?= htmlspecialchars($user_name); ?></p>
-								<a href="logout.php">Выйти</a>
-							</div>
-						</div>
+                <a class="main-header__side-item button button--plus open-modal" href="add.php">Добавить задачу</a>
+                <div class="main-header__side-item user-menu">
+                    <div class="user-menu__image">
+                        <img src="img/user.png" width="40" height="40" alt="Пользователь">
+                    </div>
+                    <div class="user-menu__data">
+                        <p><?= htmlspecialchars($user_name); ?></p>
+                        <a href="logout.php">Выйти</a>
+                    </div>
+                </div>
           <?php endif; ?>
 			</div>
 		</header>
@@ -36,20 +36,20 @@
         <?php if (!$background) : ?>
 					<section class="content__side">
               <?php if (empty($user_name)) : ?>
-								<p class="content__side-info">Если у вас уже есть аккаунт, авторизуйтесь на сайте</p>
-								<a class="button button--transparent content__side-button" href="auth.php">Войти</a>
+                <p class="content__side-info">Если у вас уже есть аккаунт, авторизуйтесь на сайте</p>
+                <a class="button button--transparent content__side-button" href="auth.php">Войти</a>
               <?php else : ?>
-								<h2 class="content__side-heading">Проекты</h2>
-								<nav class="main-navigation">
+                    <h2 class="content__side-heading">Проекты</h2>
+                    <nav class="main-navigation">
                     <?php foreach ($projects as $key => $value): ?>
-											<ul class="main-navigation__list <?= (isset($_GET['project_id']) && $value['id'] === $_GET['project_id'] ? "main-navigation__list-item--active" : ""); ?>">
-												<li class="main-navigation__list-item">
-													<a class="main-navigation__list-item-link"
-														 href="index.php?project_id=<?= $value['id']; ?>"><?= htmlspecialchars($value['title_project']); ?> </a>
-													<span class="main-navigation__list-item-count"><?= count_item($tasks_count,
-                                  $value['title_project']); ?></span>
-												</li>
-											</ul>
+                        <ul class="main-navigation__list <?= (isset($_GET['project_id']) && $value['id'] === $_GET['project_id'] ? "main-navigation__list-item--active" : ""); ?>">
+                            <li class="main-navigation__list-item">
+                                <a class="main-navigation__list-item-link"
+                                        href="index.php?<?=((isset($_GET['show_completed']) && $_GET['show_completed']) ? "show_completed=1&" : "");?>project_id=<?= $value['id']; ?>"><?= htmlspecialchars($value['title_project']); ?> </a>
+                                <span class="main-navigation__list-item-count"><?= count_item($tasks_count,
+                $value['title_project']); ?></span>
+                            </li>
+                        </ul>
                     <?php endforeach; ?>
 								</nav>
 								<a class="button button--transparent button--plus content__side-button"
